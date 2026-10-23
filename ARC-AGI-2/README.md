@@ -26,6 +26,20 @@ Full breakdowns: `report_training.md`, `report_evaluation.md`.
 
 The training split includes many easier ARC-AGI-1-style tasks. The evaluation split is representative of the hidden test set, and a hand-written DSL of this size does not solve any of it. **This version will not reach the top of the leaderboard.** It is a correct, offline-safe base to build on.
 
+## Program library
+
+`pipeline.py` also tries every verified program in `gemini/results/programs/` (written by the Gemini program search) on each task, in an isolated subprocess. A library program is used only if it reproduces all of the task's train pairs, and library hits are ranked ahead of DSL programs. Disable with `--program-library ""`.
+
+The library programs were written for specific public evaluation tasks, so they only help on a new task when it happens to share the same rule.
+
+## Submit to Kaggle
+
+```bash
+python build_kaggle_notebook.py   # writes kaggle_submission.ipynb
+```
+
+`kaggle_submission.ipynb` embeds `pipeline.py` and every library program, so it runs offline with only the competition data attached. On Kaggle: **New Notebook → File → Import Notebook**, add the ARC Prize 2026 ARC-AGI-2 competition data, turn **Internet off**, then **Submit to Competition**. Rebuild the notebook whenever the library grows.
+
 ## Run
 
 ```bash

@@ -558,6 +558,86 @@ class Compose(Family):
         return None if m is None else GEOMS[self.geom_key](m)
 
 
+# ---- Program library (verified programs from earlier searches) ------------ #
+LIB_RUNNER = r'''
+import json, sys, signal, resource
+resource.setrlimit(resource.RLIMIT_AS, (2 * 1024 ** 3, 2 * 1024 ** 3))
+def _alarm(*a):
+    raise TimeoutError("program timeout")
+signal.signal(signal.SIGALRM, _alarm)
+req = json.load(sys.stdin)
+res = {}
+for name, src in req["programs"].items():
+    ns = {"__name__": "lib_" + name}
+    outs = []
+    try:
+        signal.alarm(2)
+        exec(compile(src, name, "exec"), ns)
+        fn = ns["transform"]
+        for g in req["grids"]:
+            r = fn([row[:] for row in g])
+            if hasattr(r, "tolist"):
+                r = r.tolist()
+            outs.append([[int(v) for v in row] for row in r])
+        signal.alarm(0)
+    except BaseException:
+        signal.alarm(0)
+        outs = None
+    res[name] = outs
+print(json.dumps(res))
+'''
+
+_LIB_CACHE = {}
+
+
+def load_program_library(path):
+    """Load every *.py in `path` that defines transform(). Cached per path."""
+    if path not in _LIB_CACHE:
+        progs = {}
+        if path and os.path.isdir(path):
+            for fn in sorted(os.listdir(path)):
+                if fn.endswith(".py"):
+                    with open(os.path.join(path, fn)) as f:
+                        src = f.read()
+                    if "def transform" in src:
+                        progs[fn[:-3]] = src
+        _LIB_CACHE[path] = progs
+    return _LIB_CACHE[path]
+
+
+def run_library(progs, grids, timeout):
+    """Run every library program on every grid in one isolated subprocess."""
+    import subprocess
+    if not progs:
+        return {}
+    try:
+        p = subprocess.run([sys.executable, "-I", "-c", LIB_RUNNER],
+                           input=json.dumps({"programs": progs, "grids": grids}),
+                           capture_output=True, text=True, timeout=timeout,
+                           env={"PATH": os.environ.get("PATH", "")})
+        return json.loads(p.stdout)
+    except Exception:
+        return {}
+
+
+def library_candidates(task, lib_path, timeout=60):
+    """Library programs that reproduce every train pair, with their test predictions."""
+    progs = load_program_library(lib_path)
+    if not progs:
+        return []
+    train_in = [p["input"] for p in task["train"]]
+    train_out = [p["output"] for p in task["train"]]
+    test_in = [t["input"] for t in task["test"]]
+    res = run_library(progs, train_in + test_in, timeout)
+    hits = []
+    for name, outs in res.items():
+        if outs and outs[:len(train_in)] == train_out:
+            preds = outs[len(train_in):]
+            if all(0 < len(g) <= 30 and all(0 < len(r) <= 30 for r in g) for g in preds):
+                hits.append((f"library:{name}", preds))
+    return hits
+
+
 def library():
     """Factories for every candidate program, cheapest first."""
     fs = [lambda k=k: Geometry(k) for k in GEOMS]
@@ -580,8 +660,9 @@ def library():
 # --------------------------------------------------------------------------- #
 # Solver
 # --------------------------------------------------------------------------- #
-def solve_task(task, time_budget=10.0):
+def solve_task(task, time_budget=10.0, lib_path=None):
     """Return (list of attempts per test input, list of fitted family names)."""
+    lib_hits = library_candidates(task, lib_path) if lib_path else []
     pairs = [(G(p["input"]), G(p["output"])) for p in task["train"]]
     t0 = time.time()
     fitted = []
@@ -597,10 +678,18 @@ def solve_task(task, time_budget=10.0):
     fitted.sort(key=lambda f: f.cost)
 
     results = []
-    for t in task["test"]:
+    for ti, t in enumerate(task["test"]):
         g = G(t["input"])
         attempts, seen = [], set()
+        for name, preds in lib_hits:
+            p = G(preds[ti])
+            key = p.tobytes() + bytes(p.shape)
+            if key not in seen and len(attempts) < 2:
+                seen.add(key)
+                attempts.append((p.tolist(), name))
         for fam in fitted:
+            if len(attempts) == 2:
+                break
             try:
                 p = fam.predict(g)
             except Exception:
@@ -617,7 +706,7 @@ def solve_task(task, time_budget=10.0):
         while len(attempts) < 2:
             attempts.append((g.tolist(), "fallback:input"))
         results.append(attempts)
-    return results, [f.name for f in fitted]
+    return results, [n for n, _ in lib_hits] + [f.name for f in fitted]
 
 
 # --------------------------------------------------------------------------- #
@@ -654,6 +743,9 @@ def main():
     ap.add_argument("--out-dir", default="output")
     ap.add_argument("--time-per-task", type=float, default=10.0)
     ap.add_argument("--limit", type=int, default=0, help="only the first N tasks (0 = all)")
+    ap.add_argument("--program-library",
+                    default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "gemini", "results", "programs"),
+                    help="folder of verified transform() programs tried on every task ('' to disable)")
     args = ap.parse_args()
 
     t0 = time.time()
@@ -664,7 +756,7 @@ def main():
     submission, per_task, fam_hits, fam_fits = {}, {}, Counter(), Counter()
     solved = total = 0
     for n, tid in enumerate(ids, 1):
-        results, fitted = solve_task(tasks[tid], args.time_per_task)
+        results, fitted = solve_task(tasks[tid], args.time_per_task, args.program_library or None)
         fam_fits.update(set(fitted))
         submission[tid] = [{"attempt_1": a[0][0], "attempt_2": a[1][0]} for a in results]
         rec = {"fitted": fitted, "attempts": [[a[0][1], a[1][1]] for a in results]}
