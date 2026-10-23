@@ -273,7 +273,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--tasks-dir", required=True, help="directory of one-task-per-file ARC JSONs")
     ap.add_argument("--out-dir", default="gemini_out")
-    ap.add_argument("--model", default="gemini-4-argon")
+    ap.add_argument("--model", default="gemini-3.8-flash")
     ap.add_argument("--thinking", default="high", choices=["low", "medium", "high"])
     ap.add_argument("--max-output-tokens", type=int, default=32768)
     ap.add_argument("--max-tasks", type=int, default=20, help="new tasks to attempt this run (cost control)")
