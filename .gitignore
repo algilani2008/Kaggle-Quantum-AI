@@ -7,3 +7,4 @@ kaggle.json
 competitions/*/data/
 competitions/*/output/
 competitions/*/state.json
+catboost_info/
