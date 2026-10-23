@@ -176,5 +176,216 @@
   "model": "gemini-4-argon",
   "at": "2026-10-23T14:59:26.096548+00:00",
   "test_correct": 1.0
+ },
+ "271d71e2": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T15:58:33.094172+00:00",
+  "test_correct": 1.0
+ },
+ "28a6681f": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:06:08.336253+00:00",
+  "test_correct": 1.0
+ },
+ "291dc1e1": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:11:43.360867+00:00",
+  "test_correct": 1.0
+ },
+ "2b83f449": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: no code block",
+   "sample 2 round 1: no code block",
+   "sample 2 round 2: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:31:47.336454+00:00",
+  "test_correct": 1.0
+ },
+ "2ba387bc": {
+  "status": "failed",
+  "log": [
+   "sample 1 round 0: failed on example 1",
+   "sample 1 round 1: failed on example 1",
+   "sample 1 round 2: failed on example 1",
+   "sample 2 round 0: failed on example 1",
+   "sample 2 round 1: failed on example 1",
+   "sample 2 round 2: failed on example 1"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:36:07.761333+00:00",
+  "test_correct": 0.0
+ },
+ "2c181942": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:41:10.743522+00:00",
+  "test_correct": 1.0
+ },
+ "2d0172a1": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: failed on example 1",
+   "sample 2 round 1: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:50:03.599915+00:00",
+  "test_correct": 1.0
+ },
+ "31f7f899": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:52:00.499154+00:00",
+  "test_correct": 1.0
+ },
+ "332f06d7": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T16:55:03.246872+00:00",
+  "test_correct": 1.0
+ },
+ "35ab12c3": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: failed on example 1",
+   "sample 1 round 1: VERIFIED",
+   "sample 2 round 0: failed on example 1",
+   "sample 2 round 1: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:01:01.705158+00:00",
+  "test_correct": 1.0
+ },
+ "36a08778": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:04:28.333164+00:00",
+  "test_correct": 1.0
+ },
+ "38007db0": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:05:43.862916+00:00",
+  "test_correct": 1.0
+ },
+ "3a25b0d8": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:15:06.399155+00:00",
+  "test_correct": 1.0
+ },
+ "3dc255db": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: no code block",
+   "sample 1 round 1: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:29:13.668045+00:00",
+  "test_correct": 1.0
+ },
+ "3e6067c3": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:33:15.503126+00:00",
+  "test_correct": 1.0
+ },
+ "409aa875": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:37:16.491438+00:00",
+  "test_correct": 1.0
+ },
+ "446ef5d2": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: no code block",
+   "sample 2 round 1: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:48:38.341845+00:00",
+  "test_correct": 1.0
+ },
+ "45a5af55": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:49:55.898650+00:00",
+  "test_correct": 1.0
+ },
+ "4a21e3da": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:55:45.092403+00:00",
+  "test_correct": 1.0
+ },
+ "4c3d4a41": {
+  "status": "verified",
+  "log": [
+   "sample 1 round 0: VERIFIED",
+   "sample 2 round 0: VERIFIED"
+  ],
+  "model": "gemini-4-argon",
+  "at": "2026-10-23T17:59:37.132154+00:00",
+  "test_correct": 1.0
  }
 }
