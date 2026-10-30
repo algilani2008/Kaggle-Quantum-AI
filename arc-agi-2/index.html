@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARC-AGI-2 — حلّال بالبحث في البرامج</title>
+<meta name="description" content="حلّال لمسابقة ARC-AGI-2 يبحث في 105 برنامج DSL، مع بحث برامج بنموذج Gemini: النتائج المقاسة، العائلات، والبرامج المتحقق منها.">
+<meta property="og:title" content="ARC-AGI-2 — DSL Program-Search Solver">
+<meta property="og:description" content="105 برنامج DSL، نتائج مقاسة على بيانات ARC-AGI-2 العامة، و32 برنامجاً متحققاً منه كتبها Gemini.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Reem+Kufi:wght@500;700&display=swap">
+<link rel="stylesheet" href="portfolio.css">
+<style>
+  .fam-badge { font-family: var(--mono); font-size: 12px; direction: ltr; display: inline-block }
+  .status-ok { color: var(--good); font-weight: 600 } .status-bad { color: var(--bad); font-weight: 600 }
+  .grid-demo { display: inline-grid; gap: 2px; padding: 4px; background: var(--line); border-radius: 6px; direction: ltr }
+  .grid-demo span { width: 14px; height: 14px; border-radius: 2px }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+  .flow .box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; flex: 1 1 160px }
+  .flow .box b { display: block; font-size: 14px; margin-bottom: 2px }
+  .flow .arr { color: var(--ink-3); font-size: 18px }
+  @media (max-width: 700px) { .flow .arr { display: none } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">🧩 ARC-AGI-2</a>
+    <nav>
+      <a href="#how">طريقة العمل</a>
+      <a href="#results">النتائج</a>
+      <a href="#gemini">بحث Gemini</a>
+      <a href="#roadmap">التطوير</a>
+      <a href="#run">التشغيل</a>
+      <button class="btn-ghost theme-toggle" data-theme-toggle aria-label="تبديل الوضع الداكن">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">تعلّم آلة • مسابقة ARC Prize 2026 على Kaggle</p>
+      <h1>حلّال ARC-AGI-2 بالبحث في البرامج</h1>
+      <p class="lead">كل مهمة في ARC تعطيك أمثلة قليلة (شبكة ألوان → شبكة ألوان)، والمطلوب تكتشف القاعدة وتطبقها على مثال جديد. هذا الحلّال يجرّب مكتبة من البرامج الصغيرة على كل مهمة، ويحتفظ فقط بالبرامج اللي تعيد إنتاج <b>كل</b> أمثلة التدريب بالضبط — وقياساته منشورة بصراحة، بما فيها الضعيفة.</p>
+      <div class="chips"><span class="chip">Python</span><span class="chip">NumPy</span><span class="chip">Program Synthesis</span><span class="chip">Gemini API</span><span class="chip">Kaggle</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap"><div class="grid g4" id="kpis"></div></div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <h2>طريقة العمل</h2>
+      <p class="sub">بحث بسيط وقابل للتحقق: لا يتنبأ الحلّال بشيء ما لم يثبت صحته على أمثلة التدريب أولاً.</p>
+      <div class="flow">
+        <div class="box"><b>1. المهمة</b>2–5 أزواج تدريب (مدخل ← مخرج) ومدخل اختبار.</div>
+        <span class="arr">←</span>
+        <div class="box"><b>2. جرّب المكتبة</b><span id="libCount"></span> برنامج DSL + برامج Gemini المتحققة، بعمق تركيب حتى 2.</div>
+        <span class="arr">←</span>
+        <div class="box"><b>3. تحقّق</b>احتفظ فقط بالبرامج اللي تطابق كل مخرجات التدريب بكسلاً بكسل.</div>
+        <span class="arr">←</span>
+        <div class="box"><b>4. رتّب وأجب</b>الأبسط أولاً؛ أفضل برنامجين = attempt_1 و attempt_2.</div>
+      </div>
+      <div class="table-wrap" style="margin-top: 14px">
+        <table>
+          <thead><tr><th>العائلة</th><th>ماذا تفعل</th></tr></thead>
+          <tbody>
+            <tr><td>Geometry</td><td>الهوية، الدوران، الانعكاس، النقل (transpose)</td></tr>
+            <tr><td>Crop / Scale</td><td>قص الصندوق غير الخلفية؛ تكبير وتصغير بعامل صحيح</td></tr>
+            <tr><td><b>Pattern Replication</b></td><td>تبليط المدخل في المخرج بتحويل مُتعلَّم لكل بلاطة؛ إصلاح نمط دوري مخفي بأصغر دورة ثنائية الأبعاد؛ إصلاح نمط متماثل</td></tr>
+            <tr><td><b>Grid Reconstruction</b></td><td>تقسيم الشبكة بخطوط فاصلة لخلايا، ثم دمجها بجدول حقيقة مُتعلَّم (AND/OR/XOR/NOR) أو اختيار الخلية الشاذة</td></tr>
+            <tr><td><b>Dynamic Shape Matching</b></td><td>الكائنات المتصلة (اتصال 4/8): استخراج الأكبر أو الأصغر أو الفريد؛ إعادة تلوين بقاعدة على الحجم أو الشكل أو الصندوق</td></tr>
+            <tr><td>Post-processing</td><td>خريطة ألوان مُتعلَّمة بعد أي عائلة؛ هندسة مركّبة بعد العائلات الأخرى</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="wrap">
+      <h2>النتائج المقاسة</h2>
+      <p class="sub">pass@2 على بيانات ARC-AGI-2 العامة. مقسم التقييم هو الممثل الحقيقي للاختبار المخفي.</p>
+      <div class="grid g2">
+        <div class="card">
+          <h3>الحلول الصحيحة حسب العائلة (مقسم التدريب)</h3>
+          <p class="hint" id="famHint"></p>
+          <div class="chart tall"><canvas id="famChart" role="img" aria-label="الحلول الصحيحة حسب العائلة"></canvas></div>
+        </div>
+        <div class="card" style="display: grid; gap: 12px; align-content: start">
+          <h3>التدريب مقابل التقييم</h3>
+          <div class="chart short"><canvas id="splitChart" role="img" aria-label="مقارنة التدريب والتقييم"></canvas></div>
+          <div class="callout warn">
+            <b>قراءة صريحة للنتيجة:</b> مقسم التدريب فيه مهام أسهل كثيرة على طراز ARC-AGI-1، لذلك يحل 6.9% منها. أما مقسم التقييم فلا يحل منه شيئاً — مكتبة يدوية بهذا الحجم <b>لن تصل لصدارة الترتيب</b>، لكنها أساس صحيح ويعمل بدون إنترنت للبناء عليه.
+          </div>
+          <div>
+            <h3 style="font-size: 14px">أكثر البرامج مطابقةً لأمثلة التدريب</h3>
+            <div id="fitsList" class="note" style="margin-top: 6px; line-height: 1.9"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gemini">
+    <div class="wrap">
+      <h2>بحث البرامج بـ Gemini</h2>
+      <p class="sub" id="gemSub"></p>
+      <div class="grid g3" id="gemKpis"></div>
+      <div class="callout" style="margin-top: 12px">النموذج يكتب دالة Python <code>transform(grid)</code> لكل مهمة، ونشغّلها على أمثلة التدريب؛ إذا فشلت نرجع له الأخطاء ليصحّح (جولتا تغذية راجعة). <b>غير قابل للتقديم في Kaggle</b> لأن التقييم هناك بدون إنترنت ويمنع استخدام APIs — البرامج المتحققة تُستخدم كمكتبة إضافية وأفكار لعائلات جديدة في الحلّال الأوفلاين.</div>
+      <div class="btns" style="margin-top: 12px; justify-content: space-between; align-items: center">
+        <div class="seg" id="gemFilter" role="group" aria-label="تصفية">
+          <button data-f="" aria-pressed="true">الكل</button>
+          <button data-f="verified" aria-pressed="false">متحقق</button>
+          <button data-f="failed" aria-pressed="false">فشل</button>
+        </div>
+        <span class="note">اضغط رقم المهمة لفتح البرنامج على GitHub</span>
+      </div>
+      <div class="table-wrap" style="margin-top: 8px">
+        <table id="gemTable">
+          <thead><tr><th>المهمة</th><th>الحالة</th><th class="n">صحة الاختبار</th><th class="n">محاولات</th><th class="n">أسطر الكود</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="wrap">
+      <h2>خطة رفع النتيجة</h2>
+      <p class="sub">مرتبة حسب المكسب المتوقع على مقسم التقييم</p>
+      <ol class="steps">
+        <li><b>تدريب عصبي وقت الاختبار (أكبر مكسب).</b> ضبط نموذج لغوي صغير على أمثلة كل مهمة وقت الاستدلال مع تكبير بيانات كثيف (8 تحويلات هندسية، تبديل ألوان، إعادة ترتيب الأزواج)، ثم أخذ عينات والتصويت. يحتاج GPU ونقطة حفظ مدرّبة مسبقاً كـ Dataset في Kaggle.</li>
+        <li><b>الـ DSL كمحقّق وليس مولّداً فقط.</b> ترتيب مرشحي النموذج العصبي حسب اتفاق برنامج DSL مطابق معهم — أرخص طريقة لدمج الأسلوبين.</li>
+        <li><b>تنمية الـ DSL من إخفاقات التقييم.</b> تجميع المهام اللي ما طابقها أي برنامج حسب العملية الناقصة (تحريك كائنات، رسم خطوط، تعبئة، حجم مخرج حسب العدّ، قواعد شرطية) وإضافة عائلة لكل مجموعة مع إعادة القياس.</li>
+        <li><b>بحث أعمق مع تقليم.</b> تراكيب من 2–3 خطوات لكل العائلات، مع حذف المرشحين اللي شكل مخرجاتهم ما يطابق مخرجات التدريب قبل الفحص الكامل.</li>
+        <li><b>attempt_2 أذكى.</b> تشغيل الحلّال على نسخ مدوّرة ومعكوسة من المهمة واختيار الجواب الأكثر تكراراً بعد إرجاع التحويل.</li>
+      </ol>
+      <p class="note" style="margin-top: 8px">كل تغيير يُقاس على مقسم التقييم، لأن المكاسب على مقسم التدريب وحده كثيراً ما لا تنتقل.</p>
+    </div>
+  </section>
+
+  <section class="section" id="run">
+    <div class="wrap">
+      <h2>التشغيل والتقديم</h2>
+      <div class="grid g2" style="margin-top: 10px">
+        <div class="card">
+          <h3>محلياً</h3>
+          <pre><code>pip install -r requirements.txt
+# public repo layout (one JSON per task)
+python pipeline.py --tasks-dir path/to/data/evaluation --out-dir output
+# Kaggle layout
+python pipeline.py --challenges arc-agi_test_challenges.json --out-dir /kaggle/working</code></pre>
+          <p class="note" style="margin-top: 6px">يعتمد على <code>numpy</code> فقط، ويكتب <code>submission.json</code> و <code>report.md</code>.</p>
+        </div>
+        <div class="card">
+          <h3>التقديم في Kaggle</h3>
+          <pre><code>python build_kaggle_notebook.py   # writes kaggle_submission.ipynb</code></pre>
+          <ol style="margin: 8px 0 0; padding-inline-start: 18px">
+            <li>Kaggle ← New Notebook ← File ← Import Notebook</li>
+            <li>أضف بيانات مسابقة ARC Prize 2026</li>
+            <li>أطفئ الإنترنت (Internet off) ← Submit to Competition</li>
+          </ol>
+          <p class="note" style="margin-top: 6px">الدفتر يضمّن <code>pipeline.py</code> وكل برامج المكتبة، فيعمل بدون إنترنت.</p>
+        </div>
+      </div>
+      <div class="btns" style="margin-top: 12px">
+        <a class="btn" href="https://github.com/algilani2008/arc-agi-2">المستودع على GitHub</a>
+        <a class="btn sec" href="https://github.com/algilani2008/arc-agi-2/blob/main/report_evaluation.md">تقرير التقييم</a>
+        <a class="btn sec" href="https://github.com/algilani2008/arc-agi-2/tree/main/gemini">بحث Gemini</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><p>جزء من <a href="https://github.com/algilani2008">مشاريع algilani2008</a> • ARC-AGI هو معيار من ARC Prize Foundation.</p></div>
+</footer>
+
+<script src="chart.umd.min.js"></script>
+<script src="portfolio.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
