@@ -1,5 +1,7 @@
 # Kaggle Auto-ML Competition Engine
 
+**🌐 Live page:** https://algilani2008.github.io/Kaggle-Quantum-AI/ — pipeline walkthrough and a real demo run (`site/`).
+
 Advanced stacking pipeline that runs daily as a scheduled task.
 
 ## What it does
