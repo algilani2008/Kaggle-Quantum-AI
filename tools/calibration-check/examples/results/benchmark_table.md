@@ -1,0 +1,30 @@
+| dataset | model | calibrator | accuracy | ECE | Brier | NLL |
+|---|---|---|---|---|---|---|
+| breast_cancer | GaussianNB | uncalibrated | 0.942 | 0.059 ± 0.018 | 0.054 | 0.670 |
+| breast_cancer | GaussianNB | temperature | 0.942 | 0.034 ± 0.020 | 0.045 | 0.166 |
+| breast_cancer | GaussianNB | platt | 0.933 | 0.054 ± 0.022 | 0.053 | 0.232 |
+| breast_cancer | GaussianNB | isotonic | 0.926 | 0.052 ± 0.033 | 0.057 | 0.656 |
+| breast_cancer | LogisticRegression | uncalibrated | 0.979 | 0.018 ± 0.002 | 0.016 | 0.056 |
+| breast_cancer | LogisticRegression | temperature | 0.979 | 0.025 ± 0.010 | 0.017 | 0.063 |
+| breast_cancer | LogisticRegression | platt | 0.977 | 0.017 ± 0.008 | 0.018 | 0.066 |
+| breast_cancer | LogisticRegression | isotonic | 0.977 | 0.022 ± 0.011 | 0.019 | 0.192 |
+| breast_cancer | RandomForest | uncalibrated | 0.967 | 0.041 ± 0.017 | 0.029 | 0.192 |
+| breast_cancer | RandomForest | temperature | 0.967 | 0.056 ± 0.034 | 0.032 | 0.201 |
+| breast_cancer | RandomForest | platt | 0.965 | 0.042 ± 0.027 | 0.033 | 0.194 |
+| breast_cancer | RandomForest | isotonic | 0.958 | 0.035 ± 0.018 | 0.033 | 0.414 |
+| breast_cancer | MLP | uncalibrated | 0.974 | 0.019 ± 0.006 | 0.018 | 0.065 |
+| breast_cancer | MLP | temperature | 0.974 | 0.024 ± 0.014 | 0.018 | 0.067 |
+| breast_cancer | MLP | platt | 0.970 | 0.022 ± 0.004 | 0.021 | 0.073 |
+| breast_cancer | MLP | isotonic | 0.968 | 0.021 ± 0.013 | 0.023 | 0.203 |
+| digits | GaussianNB | uncalibrated | 0.842 | 0.147 ± 0.023 | 0.299 | 2.593 |
+| digits | GaussianNB | temperature | 0.842 | 0.037 ± 0.015 | 0.250 | 0.596 |
+| digits | GaussianNB | isotonic | 0.885 | 0.036 ± 0.012 | 0.193 | 0.765 |
+| digits | LogisticRegression | uncalibrated | 0.964 | 0.020 ± 0.003 | 0.055 | 0.114 |
+| digits | LogisticRegression | temperature | 0.964 | 0.018 ± 0.003 | 0.054 | 0.111 |
+| digits | LogisticRegression | isotonic | 0.963 | 0.023 ± 0.005 | 0.060 | 0.497 |
+| digits | RandomForest | uncalibrated | 0.976 | 0.223 ± 0.007 | 0.122 | 0.332 |
+| digits | RandomForest | temperature | 0.976 | 0.015 ± 0.005 | 0.036 | 0.073 |
+| digits | RandomForest | isotonic | 0.978 | 0.015 ± 0.004 | 0.040 | 0.287 |
+| digits | MLP | uncalibrated | 0.971 | 0.018 ± 0.005 | 0.041 | 0.100 |
+| digits | MLP | temperature | 0.971 | 0.019 ± 0.006 | 0.041 | 0.098 |
+| digits | MLP | isotonic | 0.970 | 0.020 ± 0.006 | 0.048 | 0.396 |
