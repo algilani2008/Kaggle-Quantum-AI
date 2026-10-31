@@ -1,0 +1,29 @@
+{
+  "input": "demo_predictions_digits_gnb.csv",
+  "evaluated_on": "359 held-out rows (360 rows used to fit 'temperature')",
+  "before": {
+    "n_samples": 359,
+    "n_classes": 10,
+    "accuracy": 0.8217270194986073,
+    "ece": 0.1691744401114206,
+    "ece_quantile": 0.1670178328690809,
+    "mce": 0.522249,
+    "brier": 0.3402305607386212,
+    "log_loss": 3.5384071922030973,
+    "mean_confidence": 0.988744852367688,
+    "n_bins": 15
+  },
+  "after": {
+    "n_samples": 359,
+    "n_classes": 10,
+    "accuracy": 0.8217270194986073,
+    "ece": 0.017424729527196946,
+    "ece_quantile": 0.06650643652750826,
+    "mce": 0.1627865310466997,
+    "brier": 0.2928139334892188,
+    "log_loss": 0.7374440606896701,
+    "mean_confidence": 0.8203848827371122,
+    "n_bins": 15
+  },
+  "temperature": 6.66198011862076
+}
