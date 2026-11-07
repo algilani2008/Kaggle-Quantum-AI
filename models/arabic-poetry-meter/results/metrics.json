@@ -1,0 +1,115 @@
+{
+  "dataset": "MetRec (official train/test split; 10% of train held out for validation)",
+  "n_train": 47124,
+  "n_validation_holdout": 4713,
+  "n_test": 8316,
+  "n_test_also_in_train": 23,
+  "chosen_C": 1.0,
+  "augmented_with_diacritic_free_copies": true,
+  "validation": [
+    {
+      "model": "majority class",
+      "val_accuracy": 0.09081264587311691,
+      "val_macro_f1": 0.011893183649651263
+    },
+    {
+      "model": "length only",
+      "val_accuracy": 0.25228092510078504,
+      "val_macro_f1": 0.20170532723353424
+    },
+    {
+      "model": "characters only (bag of char n-grams)",
+      "val_accuracy": 0.5991937194992574,
+      "val_macro_f1": 0.5907749229807032
+    },
+    {
+      "model": "rhythm skeleton only",
+      "val_accuracy": 0.7893061744112031,
+      "val_macro_f1": 0.7688556772026559
+    },
+    {
+      "model": "characters + rhythm",
+      "val_accuracy": 0.8141311266709103,
+      "val_macro_f1": 0.8045181633736913
+    },
+    {
+      "model": "full (chars + rhythm + length), C=0.25",
+      "val_accuracy": 0.8391682580097602,
+      "val_macro_f1": 0.8309046750068303
+    },
+    {
+      "model": "full (chars + rhythm + length), C=0.5",
+      "val_accuracy": 0.8448970931466158,
+      "val_macro_f1": 0.8411147323987115
+    },
+    {
+      "model": "full (chars + rhythm + length), C=1.0",
+      "val_accuracy": 0.8474432420963293,
+      "val_macro_f1": 0.8442174438959075
+    },
+    {
+      "model": "full, C=1.0, + diacritic-free copies",
+      "val_accuracy": 0.8502015701251856,
+      "val_macro_f1": 0.8464767269051696
+    }
+  ],
+  "validation_accuracy_diacritics_removed": {
+    "full_plain": 0.5926161680458307,
+    "full_augmented": 0.7818799066412052
+  },
+  "test": [
+    {
+      "model": "majority class",
+      "test_accuracy": 0.08645983645983646
+    },
+    {
+      "model": "length only",
+      "test_accuracy": 0.2475949975949976
+    },
+    {
+      "model": "characters only (bag of char n-grams)",
+      "test_accuracy": 0.6005291005291006
+    },
+    {
+      "model": "bahr full model (C=1.0, augmented)",
+      "test_accuracy": 0.844997594997595
+    }
+  ],
+  "final_model_test": {
+    "accuracy": 0.844997594997595,
+    "accuracy_95ci_bootstrap": [
+      0.8376623376623377,
+      0.8532948532948533
+    ],
+    "macro_f1": 0.8374948332494372,
+    "accuracy_dedup_test": 0.8445677077052937,
+    "accuracy_if_diacritics_removed": 0.7722462722462723,
+    "accuracy_saved_float16_model": 0.844997594997595,
+    "saved_vs_in_memory_agreement": 1.0,
+    "by_diacritization": [
+      {
+        "diacritics": "none (<5%)",
+        "n": 1288,
+        "accuracy": 0.7593167701863354
+      },
+      {
+        "diacritics": "partial (5-40%)",
+        "n": 2401,
+        "accuracy": 0.8092461474385673
+      },
+      {
+        "diacritics": "heavy (>=40%)",
+        "n": 4627,
+        "accuracy": 0.8874000432245516
+      }
+    ]
+  },
+  "weights_size_mb": 5.89,
+  "reference_published_result": "AraMeter 5-layer BiGRU: 94.32% test accuracy (Al-shaibani et al., 2020) - not re-run here",
+  "environment": {
+    "python": "3.13.18",
+    "scikit_learn": "1.9.1",
+    "numpy": "2.5.3"
+  },
+  "runtime_seconds": 474.4
+}
