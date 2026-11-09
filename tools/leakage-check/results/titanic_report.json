@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "n_train": 981,
+    "n_test": 328,
+    "n_features": 3,
+    "task": "classification",
+    "univariate_scores": {
+      "sex": 0.7364158415841584,
+      "age": 0.5926380638063805,
+      "passengerClass": 0.6684708470847085
+    },
+    "adversarial_auc": 0.5127048059471421
+  },
+  "findings": [
+    {
+      "check": "cross_duplicates",
+      "severity": "medium",
+      "message": "286 of 328 test rows (87.2%) have exact copies in train. Only 31% of train rows are distinct, so repeats are expected for this data; this is a weaker signal.",
+      "details": {
+        "n": 286,
+        "share": 0.8719512195121951,
+        "train_unique_ratio": 0.30988786952089703,
+        "example_test_index": [
+          "1139",
+          "263",
+          "841",
+          "1055",
+          "107"
+        ]
+      }
+    },
+    {
+      "check": "train_duplicates",
+      "severity": "low",
+      "message": "69.0% of train rows repeat an earlier row on all features. With so few distinct rows this is probably natural to the data, not a pipeline bug.",
+      "details": {
+        "share": 0.6901121304791029
+      }
+    },
+    {
+      "check": "conflicting_labels",
+      "severity": "info",
+      "message": "68 groups of identical feature rows carry different targets (label noise or missing features).",
+      "details": {
+        "groups": 68
+      }
+    },
+    {
+      "check": "adversarial_validation",
+      "severity": "info",
+      "message": "A model separates train from test rows with AUC 0.513 (0.5 = indistinguishable, z = 0.7). Most shifted columns: age (0.51), passengerClass (0.50), sex (0.48).",
+      "details": {
+        "auc": 0.5127048059471421,
+        "z": 0.6871309107944074,
+        "top_features": {
+          "age": 0.5122432933044927,
+          "passengerClass": 0.5031093831580516,
+          "sex": 0.48462867656199504
+        }
+      }
+    }
+  ]
+}
