@@ -1,0 +1,155 @@
+{
+  "data": {
+    "first": "1958-03",
+    "last": "2026-09",
+    "months": 823,
+    "noaa_interpolated_months": 195,
+    "source": "https://raw.githubusercontent.com/datasets/co2-ppm/main/data/co2-mm-mlo.csv"
+  },
+  "split": {
+    "train": [
+      "1958-03",
+      "2019-12"
+    ],
+    "validation": [
+      "2020-01",
+      "2022-12"
+    ],
+    "test": [
+      "2023-01",
+      "2026-09"
+    ]
+  },
+  "chosen_params": {
+    "seasonal_naive": {},
+    "seasonal_naive_drift": {
+      "drift_years": 10
+    },
+    "harmonic_trend": {
+      "degree": 2,
+      "harmonics": 2,
+      "window_years": 30,
+      "anchor_months": 6
+    }
+  },
+  "validation": {
+    "seasonal_naive": {
+      "mae": 4.7361111111111125,
+      "rmse": 5.062341355538959,
+      "mape_pct": 1.1357159643905868
+    },
+    "seasonal_naive_drift": {
+      "mae": 0.28833333333332845,
+      "rmse": 0.37016392765007744,
+      "mape_pct": 0.06914233868034095
+    },
+    "harmonic_trend": {
+      "mae": 0.48164972232353087,
+      "rmse": 0.6149587123703812,
+      "mape_pct": 0.11544361205554426
+    }
+  },
+  "test": {
+    "seasonal_naive": {
+      "mae": 6.777777777777771,
+      "rmse": 7.4306018897828405,
+      "mape_pct": 1.5881046715763163
+    },
+    "seasonal_naive_drift": {
+      "mae": 1.033988888888886,
+      "rmse": 1.1862053831909136,
+      "mape_pct": 0.2426191816406103
+    },
+    "harmonic_trend": {
+      "mae": 0.6218361618565761,
+      "rmse": 0.7378017663208106,
+      "mape_pct": 0.14612635808619562
+    }
+  },
+  "cv_mae_36m": {
+    "seasonal_naive": 4.038008474576272,
+    "seasonal_naive_drift": 0.7457838198367892,
+    "harmonic_trend": 0.6186637383694916
+  },
+  "test_mae_by_horizon_year": {
+    "seasonal_naive": [
+      {
+        "horizon_year": 1,
+        "months": 12,
+        "mae": 2.5516666666666623
+      },
+      {
+        "horizon_year": 2,
+        "months": 12,
+        "mae": 6.075833333333326
+      },
+      {
+        "horizon_year": 3,
+        "months": 12,
+        "mae": 8.82083333333332
+      },
+      {
+        "horizon_year": 4,
+        "months": 9,
+        "mae": 10.624444444444439
+      }
+    ],
+    "seasonal_naive_drift": [
+      {
+        "horizon_year": 1,
+        "months": 12,
+        "mae": 0.5530416666666582
+      },
+      {
+        "horizon_year": 2,
+        "months": 12,
+        "mae": 1.2187499999999953
+      },
+      {
+        "horizon_year": 3,
+        "months": 12,
+        "mae": 1.4790833333333306
+      },
+      {
+        "horizon_year": 4,
+        "months": 9,
+        "mae": 0.8354444444444513
+      }
+    ],
+    "harmonic_trend": [
+      {
+        "horizon_year": 1,
+        "months": 12,
+        "mae": 0.359562407025597
+      },
+      {
+        "horizon_year": 2,
+        "months": 12,
+        "mae": 0.8456909672315381
+      },
+      {
+        "horizon_year": 3,
+        "months": 12,
+        "mae": 0.921787447912493
+      },
+      {
+        "horizon_year": 4,
+        "months": 9,
+        "mae": 0.2731263797233762
+      }
+    ]
+  },
+  "best_baseline": "seasonal_naive_drift",
+  "learned_vs_best_baseline_mae_reduction_pct": 39.9,
+  "test_interval90_coverage": 0.933,
+  "backtest_origins": {
+    "test_horizon": 57,
+    "future_horizon": 68
+  },
+  "forecast_peak": {
+    "month": "2028-05",
+    "ppm": 437.38,
+    "lo90": 435.69,
+    "hi90": 438.75
+  }
+}
