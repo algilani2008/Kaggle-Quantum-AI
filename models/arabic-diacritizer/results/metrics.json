@@ -1,0 +1,274 @@
+{
+ "config": {
+  "quick": false,
+  "epochs": 15,
+  "n_bits": 21,
+  "alpha": 1e-07,
+  "chunk": 5000,
+  "seed": 0
+ },
+ "best_epoch_on_val": 15,
+ "val_history": [
+  {
+   "epoch": 1,
+   "DER": 0.06367,
+   "DER_no_case_ending": 0.04304,
+   "WER": 0.19663,
+   "WER_no_case_ending": 0.09692
+  },
+  {
+   "epoch": 2,
+   "DER": 0.05853,
+   "DER_no_case_ending": 0.03924,
+   "WER": 0.18188,
+   "WER_no_case_ending": 0.08862
+  },
+  {
+   "epoch": 3,
+   "DER": 0.05603,
+   "DER_no_case_ending": 0.03741,
+   "WER": 0.17453,
+   "WER_no_case_ending": 0.08449
+  },
+  {
+   "epoch": 4,
+   "DER": 0.05466,
+   "DER_no_case_ending": 0.03645,
+   "WER": 0.17058,
+   "WER_no_case_ending": 0.08232
+  },
+  {
+   "epoch": 5,
+   "DER": 0.05356,
+   "DER_no_case_ending": 0.03565,
+   "WER": 0.16753,
+   "WER_no_case_ending": 0.08058
+  },
+  {
+   "epoch": 6,
+   "DER": 0.05232,
+   "DER_no_case_ending": 0.0348,
+   "WER": 0.16397,
+   "WER_no_case_ending": 0.07872
+  },
+  {
+   "epoch": 7,
+   "DER": 0.05119,
+   "DER_no_case_ending": 0.03404,
+   "WER": 0.16081,
+   "WER_no_case_ending": 0.07716
+  },
+  {
+   "epoch": 8,
+   "DER": 0.05024,
+   "DER_no_case_ending": 0.03342,
+   "WER": 0.15787,
+   "WER_no_case_ending": 0.07572
+  },
+  {
+   "epoch": 9,
+   "DER": 0.04942,
+   "DER_no_case_ending": 0.03279,
+   "WER": 0.15534,
+   "WER_no_case_ending": 0.07431
+  },
+  {
+   "epoch": 10,
+   "DER": 0.04874,
+   "DER_no_case_ending": 0.03234,
+   "WER": 0.15328,
+   "WER_no_case_ending": 0.07336
+  },
+  {
+   "epoch": 11,
+   "DER": 0.04802,
+   "DER_no_case_ending": 0.03181,
+   "WER": 0.15117,
+   "WER_no_case_ending": 0.07217
+  },
+  {
+   "epoch": 12,
+   "DER": 0.04761,
+   "DER_no_case_ending": 0.0315,
+   "WER": 0.14996,
+   "WER_no_case_ending": 0.07155
+  },
+  {
+   "epoch": 13,
+   "DER": 0.04715,
+   "DER_no_case_ending": 0.03119,
+   "WER": 0.14865,
+   "WER_no_case_ending": 0.07089
+  },
+  {
+   "epoch": 14,
+   "DER": 0.04666,
+   "DER_no_case_ending": 0.03085,
+   "WER": 0.1472,
+   "WER_no_case_ending": 0.07016
+  },
+  {
+   "epoch": 15,
+   "DER": 0.04634,
+   "DER_no_case_ending": 0.03064,
+   "WER": 0.14621,
+   "WER_no_case_ending": 0.06973
+  }
+ ],
+ "classes": [
+  "none",
+  "fatha",
+  "kasra",
+  "sukun",
+  "damma",
+  "shadda+fatha",
+  "kasratan",
+  "shadda+kasra",
+  "dammatan",
+  "fathatan",
+  "shadda+damma",
+  "shadda",
+  "shadda+kasratan",
+  "shadda+dammatan",
+  "shadda+fathatan"
+ ],
+ "n_train_lines": 50000,
+ "n_train_letters": 8356033,
+ "weights_size_mb": 7.46,
+ "runtime_seconds": 624,
+ "python": "3.13.18",
+ "sklearn": "1.9.1",
+ "results": {
+  "letter_majority": {
+   "val": {
+    "letters": 407434,
+    "words": 102479,
+    "DER": 0.48047045656474424,
+    "DER_no_case_ending": 0.4694233575445558,
+    "WER": 0.8504278925438382,
+    "WER_no_case_ending": 0.7434303613423238
+   },
+   "test": {
+    "letters": 426469,
+    "words": 107291,
+    "DER": 0.4801966848704126,
+    "DER_no_case_ending": 0.46993840427598393,
+    "WER": 0.8478996374346404,
+    "WER_no_case_ending": 0.739614692751489
+   }
+  },
+  "word_lookup": {
+   "val": {
+    "letters": 407434,
+    "words": 102479,
+    "DER": 0.08844377248830486,
+    "DER_no_case_ending": 0.05279467462412487,
+    "WER": 0.2406541828081851,
+    "WER_no_case_ending": 0.09530733125811142
+   },
+   "test": {
+    "letters": 426469,
+    "words": 107291,
+    "DER": 0.09052944059239945,
+    "DER_no_case_ending": 0.055928040153143385,
+    "WER": 0.24145548088842494,
+    "WER_no_case_ending": 0.09879673038745095
+   }
+  },
+  "tashkeel_linear (this model)": {
+   "val": {
+    "letters": 407434,
+    "words": 102479,
+    "DER": 0.04644678647339201,
+    "DER_no_case_ending": 0.030660261350035252,
+    "WER": 0.14651782316377013,
+    "WER_no_case_ending": 0.06964353672459724
+   },
+   "test": {
+    "letters": 426469,
+    "words": 107291,
+    "DER": 0.04711714098797334,
+    "DER_no_case_ending": 0.031941424534272414,
+    "WER": 0.14811121156480972,
+    "WER_no_case_ending": 0.07329598941197304
+   }
+  }
+ },
+ "per_class_test": [
+  {
+   "label": "none",
+   "count": 75939,
+   "error_rate": 0.0077
+  },
+  {
+   "label": "fatha",
+   "count": 150213,
+   "error_rate": 0.0353
+  },
+  {
+   "label": "kasra",
+   "count": 64448,
+   "error_rate": 0.0584
+  },
+  {
+   "label": "sukun",
+   "count": 62656,
+   "error_rate": 0.0158
+  },
+  {
+   "label": "damma",
+   "count": 41070,
+   "error_rate": 0.1298
+  },
+  {
+   "label": "shadda+fatha",
+   "count": 15274,
+   "error_rate": 0.0564
+  },
+  {
+   "label": "kasratan",
+   "count": 4349,
+   "error_rate": 0.1662
+  },
+  {
+   "label": "shadda+kasra",
+   "count": 3119,
+   "error_rate": 0.1491
+  },
+  {
+   "label": "dammatan",
+   "count": 2927,
+   "error_rate": 0.2679
+  },
+  {
+   "label": "fathatan",
+   "count": 3200,
+   "error_rate": 0.0981
+  },
+  {
+   "label": "shadda+damma",
+   "count": 2176,
+   "error_rate": 0.1742
+  },
+  {
+   "label": "shadda",
+   "count": 471,
+   "error_rate": 0.9045
+  },
+  {
+   "label": "shadda+kasratan",
+   "count": 273,
+   "error_rate": 0.2711
+  },
+  {
+   "label": "shadda+dammatan",
+   "count": 222,
+   "error_rate": 0.2928
+  },
+  {
+   "label": "shadda+fathatan",
+   "count": 132,
+   "error_rate": 0.1591
+  }
+ ]
+}
