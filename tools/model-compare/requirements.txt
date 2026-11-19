@@ -1,0 +1,10 @@
+# core library + CLI
+numpy>=1.23
+scipy>=1.9
+pandas>=1.5
+# benchmark and example scripts
+scikit-learn>=1.2
+joblib>=1.2
+matplotlib>=3.6
+# tests
+pytest>=7

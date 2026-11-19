@@ -1,0 +1,30 @@
+$ python -m sigdiff compare results/example_predictions.csv --target y --a logreg --b gbm --metric accuracy --method mcnemar
+accuracy (higher is better), n=1000
+  logreg: 0.85700
+  gbm: 0.87500
+  gbm - logreg: +0.01800  [95% CI +0.00500, +0.03100]
+  p-value (mcnemar): 0.01135
+  verdict: gbm is better (p=0.0114 < 0.05)
+
+$ python -m sigdiff compare results/example_predictions.csv --target y --a logreg --b gbm --metric auc
+auc (higher is better), n=1000
+  logreg: 0.90275
+  gbm: 0.91303
+  gbm - logreg: +0.01027  [95% CI +0.00096, +0.02042]
+  p-value (bootstrap): 0.03
+  verdict: gbm is better (p=0.03 < 0.05)
+
+$ python -m sigdiff compare results/example_predictions.csv --target y --a logreg --b gbm,tree --metric logloss
+logloss (lower is better), n=1000
+  logreg: 0.31094
+  gbm: 0.29191
+  gbm - logreg: -0.01903  [95% CI -0.03264, -0.00658]
+  p-value (bootstrap+holm): 0.008
+  verdict: gbm is better (p=0.008 < 0.05)
+
+logloss (lower is better), n=1000
+  logreg: 0.31094
+  tree: 0.33495
+  tree - logreg: +0.02401  [95% CI +0.00461, +0.04247]
+  p-value (bootstrap+holm): 0.011
+  verdict: logreg is better (p=0.011 < 0.05)
